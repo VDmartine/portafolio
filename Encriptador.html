@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Desafio Encriptador</title>
+
+</head>
+<body>
+    <header class="caja">
+        <nav>
+            <h1>Desafio Encriptador</h1>
+        </nav>
+        
+    </header>
+    <main>
+        <section class="contenido">
+            <button id="copiar" onclick="copiartxt()"></button>
+            <div class="encriptado">
+                <label for="mensaje">Escribe tu mensaje a codificar:</label><br>
+                <textarea name="Mensaje" id="mensajes" cols="30" rows="10"></textarea>
+                <button onclick="guardarTxt()" class="b1"></button>
+            </div>
+            
+            <div class="desencriptado">        
+                <label for="resultado">Escribe tu mensaje a decodificar:</label><br>
+                <textarea name="" id="resultado" cols="30" rows="10"></textarea>
+                <button onclick="decodificar()" class="b2"></button>
+            </div>
+        </section>
+        
+    </main>
+    <footer class="pie">
+        <p>Victor Daniel Martinez de Anda</p>
+    </footer>
+</body>
+<script>
+    var texto=""
+    var mensaje1=""
+    var mensaje2=[]
+    var resultadosA=""
+    var decod1=""
+    var decod2=[]
+    var m=0
+    function copiartxt(){
+        var content = document.getElementById(texto);
+        content.select();
+        document.execCommand('copy');
+    }
+    function codificar(mensaje){
+        for(var i=0;i<mensaje.length;i++){
+            /*console.log(mensaje[i])*/
+            switch(mensaje1[i]){
+                case 'a':
+                    mensaje2[i]="ai"
+                    break;
+                case 'e':
+                    mensaje2[i]="enter"
+                    break;
+                case 'i':
+                    mensaje2[i]="imes"
+                    break;
+                case 'o':
+                    mensaje2[i]="ober"
+                    break;
+                case 'u':
+                    mensaje2[i]="ufat"
+                    break;
+                default:
+                    mensaje2[i]=mensaje1[i]
+                    break;
+            }
+        }
+        console.log(mensaje2)
+        texto="resultado"
+        escribe(mensaje2,"resultado")
+    }
+    function decodificar(){
+        decod1=document.getElementById("resultado").value
+        console.log(decod1)
+        for(var k=0;k<decod1.length;k++){
+            var str1=""+decod1[k]+""+decod1[k+1]+""+decod1[k+2]+""+decod1[k+3]
+            if (""+decod1[k]+""+decod1[k+1]=="ai"){
+                decod2[m]="a"
+                k=k+2
+                m++
+            }
+            if(""+decod1[k]+""+decod1[k+1]+""+decod1[k+2]+""+decod1[k+3]+""+decod1[k+4]=="enter"){
+                decod2[m]="e"
+                k=k+5
+                m++
+            }
+            console.log(str1)
+            switch(str1){
+                case 'imes':
+                    decod2[m]="i"
+                    k=k+3
+                    m++
+                    break;
+                case 'ober':
+                    decod2[m]="o"
+                    k=k+3
+                    m++
+                    break;
+                case 'ufat':
+                    decod2[m]="u"
+                    k=k+3
+                    m++
+                    break;
+                default:
+                    if(decod1[k]!=undefined){
+                        decod2[m]=decod1[k]
+                        m++
+                    }
+                    
+                    console.log(decod2[k])
+                    break;
+                
+            }
+        }
+        console.log(decod2)
+        texto="mensajes"
+        escribe(decod2,"mensajes")
+    }
+    
+    /*  |||Para ambas text area escriban al mismo tiempo|||
+    setInterval(function(){
+        mensaje1=document.getElementById("mensajes")
+        let respuesta = document.getElementById("resultado").innerHTML = mensaje1.value
+    },100)*/
+    /*function escribe2(m2){
+        document.getElementById("resultado").value = ""
+        for(var l=0;l<m2.length;l++){
+            resultadosB=""+resultadosB+""+m2[l]
+        }
+        let respuesta = document.getElementById("mensajes").innerHTML = resultadosB
+        mensaje1=""
+        mensaje2=[]
+        resultadosA=""
+        resultadosB=""
+        decod1=""
+        decod2=[]
+        m=0
+    }*/
+    function escribe(m1,caja){
+        let respuesta1 = document.getElementById("mensajes").value = ""
+        let respuesta2 = document.getElementById("resultado").value = ""
+        for(var j=0;j<m1.length;j++){
+            resultadosA=""+resultadosA+""+m1[j]            
+        }
+        let respuesta = document.getElementById(caja).value = resultadosA
+
+        resultadosA=""
+        mensaje1=""
+        mensaje2=[]
+        decod1=""
+        decod2=[]
+        m=0
+        respuesta=""
+    }
+    function guardarTxt(){
+        
+        mensaje1=document.getElementById("mensajes")
+        console.log(mensaje1.value)
+        console.log(typeof(mensaje1.value))
+        mensaje1=mensaje1.value
+        console.log(mensaje1)
+        codificar(mensaje1)
+    }
+    
+    
+</script>
+</html>
